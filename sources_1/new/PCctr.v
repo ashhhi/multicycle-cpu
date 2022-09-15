@@ -19,11 +19,11 @@ PCWre,Branch, Jump, Zero, imm,pc_in,pc_out
     //clk上升沿触发
     always @(Jump or Branch or Zero or PCWre)
     if(Jump)
-        pc_out={pc_in[31:28],imm[25:0],1'b0,1'b0};
+        pc_out={pc_in[31:28],imm[25:0],1'b0,1'b0};  //伪直接寻址
     else if(Branch&&Zero)
-        pc_out=pc_in+{{14{imm[15]}},imm[15:0],1'b0,1'b0};
+        pc_out=pc_in+{{14{imm[15]}},imm[15:0],1'b0,1'b0};   //相对寻址
     else if(!Jump&&PCWre)
-        pc_out=pc_in+4;
+        pc_out=pc_in+4;    
         
 endmodule
 
